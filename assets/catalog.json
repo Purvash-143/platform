@@ -1,0 +1,23 @@
+[
+  {
+    "id": "eks-cluster",
+    "name": "EKS Cluster",
+    "description": "Deploys an AWS EKS Cluster with default networking and IAM roles.",
+    "category": "Infrastructure",
+    "terraform_module": "terraform-aws-modules/eks/aws"
+  },
+  {
+    "id": "java-app",
+    "name": "Java Microservice",
+    "description": "Deploys a Java containerized app to EKS.",
+    "category": "Application",
+    "terraform_module": "modules/java-app"
+  },
+  {
+    "id": "monitoring-stack",
+    "name": "Prometheus & Grafana",
+    "description": "Deploys Prometheus and Grafana for observability.",
+    "category": "Monitoring",
+    "terraform_module": "modules/monitoring"
+  }
+]
