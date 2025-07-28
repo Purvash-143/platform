@@ -6,7 +6,7 @@ function triggerDeployment() {
     return;
   }
 
-  const token = "A"; // 🔐 Replace this with your GitHub PAT (for testing only)
+  const token = "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"; // 🔐 Replace this with your GitHub PAT (for testing only)
   const owner = "Purvash-143";
   const repo = "platform"; // Replace with your repo name
 
