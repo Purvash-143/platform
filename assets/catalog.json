@@ -1,112 +1,16 @@
 [
-  
   {
-    "id": "eks-cluster",
-    "name": "EKS Cluster",
-    "description": "Deploys an AWS EKS Cluster with default networking and IAM roles.",
+    "id": "ec2-instance",
+    "name": "EC2 Instance",
+    "description": "Deploys an AWS EC2 Virtual Machine.",
     "category": "Infrastructure",
-    "terraform_module": "terraform-aws-modules/eks/aws"
+    "terraform_module": "terraform-aws-modules/ec2-instance/aws"
   },
   {
-    "id": "aks-cluster",
-    "name": "AKS Cluster",
-    "description": "Deploys an Azure AKS Cluster with default setup.",
+    "id": "azure-vm",
+    "name": "Azure VM",
+    "description": "Deploys an Azure Virtual Machine.",
     "category": "Infrastructure",
-    "terraform_module": "terraform-azurerm-modules/aks/azure"
-  },
-  {
-    "id": "gke-cluster",
-    "name": "GKE Cluster",
-    "description": "Deploys a Google Kubernetes Engine cluster.",
-    "category": "Infrastructure",
-    "terraform_module": "terraform-google-modules/kubernetes-engine/google"
-  },
-  {
-    "id": "onprem-cluster",
-    "name": "On-Prem Kubernetes",
-    "description": "Deploys a K8s cluster on on-premises infrastructure using Kubeadm.",
-    "category": "Infrastructure",
-    "terraform_module": "modules/onprem-k8s"
-  },
-  {
-    "id": "fargate-cluster",
-    "name": "EKS Fargate",
-    "description": "Deploys an AWS EKS Fargate profile for serverless workloads.",
-    "category": "Infrastructure",
-    "terraform_module": "modules/eks-fargate"
-  },
-
- 
-  {
-    "id": "java-app",
-    "name": "Java Microservice",
-    "description": "Deploys a Java Spring Boot microservice container to Kubernetes.",
-    "category": "Application",
-    "terraform_module": "modules/java-app"
-  },
-  {
-    "id": "node-app",
-    "name": "Node.js App",
-    "description": "Deploys a Node.js application to Kubernetes.",
-    "category": "Application",
-    "terraform_module": "modules/node-app"
-  },
-  {
-    "id": "python-api",
-    "name": "Python FastAPI App",
-    "description": "Deploys a Python FastAPI backend to Kubernetes.",
-    "category": "Application",
-    "terraform_module": "modules/python-fastapi"
-  },
-  {
-    "id": "go-service",
-    "name": "Go Microservice",
-    "description": "Deploys a Go-based service to Kubernetes.",
-    "category": "Application",
-    "terraform_module": "modules/go-service"
-  },
-  {
-    "id": "react-frontend",
-    "name": "React Frontend",
-    "description": "Deploys a React frontend served via Nginx to Kubernetes.",
-    "category": "Application",
-    "terraform_module": "modules/react-nginx"
-  },
-
-  
-  {
-    "id": "prom-grafana",
-    "name": "Prometheus & Grafana",
-    "description": "Deploys Prometheus and Grafana for monitoring and visualization.",
-    "category": "Monitoring",
-    "terraform_module": "modules/monitoring/prometheus-grafana"
-  },
-  {
-    "id": "datadog-agent",
-    "name": "Datadog Agent",
-    "description": "Deploys Datadog agent for monitoring Kubernetes workloads.",
-    "category": "Monitoring",
-    "terraform_module": "modules/monitoring/datadog"
-  },
-  {
-    "id": "newrelic-monitoring",
-    "name": "New Relic",
-    "description": "Deploys New Relic for infrastructure and application monitoring.",
-    "category": "Monitoring",
-    "terraform_module": "modules/monitoring/newrelic"
-  },
-  {
-    "id": "cloudwatch",
-    "name": "CloudWatch Agent",
-    "description": "Deploys AWS CloudWatch agent to capture metrics and logs.",
-    "category": "Monitoring",
-    "terraform_module": "modules/monitoring/cloudwatch"
-  },
-  {
-    "id": "elk-stack",
-    "name": "ELK Stack",
-    "description": "Deploys Elasticsearch, Logstash, and Kibana for logging and analytics.",
-    "category": "Monitoring",
-    "terraform_module": "modules/monitoring/elk"
+    "terraform_module": "terraform-azurerm-modules/vm/azure"
   }
 ]
