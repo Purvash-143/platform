@@ -1,58 +1,41 @@
-let selectedAssets = {
-  Infrastructure: null
-  // Application: null,
-  // Monitoring: null
-};
-
-window.onload = function () {
-  fetch('assets/catalog.json')
-    .then(response => response.json())
-    .then(data => renderDropdowns(data))
-    .catch(error => console.error('Error loading catalog:', error));
-};
-
-function renderDropdowns(assets) {
-  const infraSelect = document.getElementById('infrastructure-select');
-  // const appSelect = document.getElementById('application-select');
-  // const monitorSelect = document.getElementById('monitoring-select');
-
-  infraSelect.length = 1;
-  // appSelect.length = 1;
-  // monitorSelect.length = 1;
-
-  assets.forEach(asset => {
-    const option = document.createElement('option');
-    option.value = asset.id;
-    option.textContent = asset.name;
-
-    if (asset.category === "Infrastructure") infraSelect.appendChild(option);
-    // if (asset.category === "Application") appSelect.appendChild(option);
-    // if (asset.category === "Monitoring") monitorSelect.appendChild(option);
-  });
-
-  infraSelect.onchange = () => selectedAssets.Infrastructure = infraSelect.value;
-  // appSelect.onchange = () => selectedAssets.Application = appSelect.value;
-  // monitorSelect.onchange = () => selectedAssets.Monitoring = monitorSelect.value;
-}
-
 function triggerDeployment() {
-  const selected = Object.values(selectedAssets).filter(Boolean);
+  const vmType = selectedAssets.Infrastructure;
 
-  if (selected.length < 1) {
+  if (!vmType) {
     alert("Please select a Virtual Machine before deploying.");
     return;
   }
 
-  // Simulate REST API trigger
-  alert("Selected Modules:\n" + JSON.stringify(selectedAssets, null, 2));
+  const token = "A"; // 🔐 Replace this with your GitHub PAT (for testing only)
+  const owner = "Purvash-143";
+  const repo = "platform"; // Replace with your repo name
 
-  // Example: call REST API endpoint
-  // fetch('https://api.example.com/deploy', {
-  //   method: 'POST',
-  //   headers: { 'Content-Type': 'application/json' },
-  //   body: JSON.stringify(selectedAssets)
-  // })
-  // .then(res => res.json())
-  // .then(data => alert("Deployment started: " + JSON.stringify(data)))
-  // .catch(err => console.error("Deployment error:", err));
+  fetch(`https://api.github.com/repos/${owner}/${repo}/actions/workflows/deploy.yml/dispatches`, {
+    method: "POST",
+    headers: {
+      "Authorization": `token ${token}`,
+      "Accept": "application/vnd.github.v3+json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      ref: "main", // Or "master", depending on your branch
+      inputs: {
+        vm_type: vmType
+      }
+    })
+  })
+  .then(response => {
+    if (response.status === 204) {
+      alert(`✅ Deployment triggered for: ${vmType}`);
+    } else {
+      return response.json().then(data => {
+        console.error("GitHub API Error:", data);
+        alert("❌ Failed to trigger deployment. See console.");
+      });
+    }
+  })
+  .catch(err => {
+    console.error("Network Error:", err);
+    alert("❌ Could not reach GitHub API.");
+  });
 }
