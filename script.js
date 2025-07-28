@@ -34,7 +34,7 @@ function triggerDeployment() {
     return;
   }
 
-  const token = "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"; // Replace securely
+  const token = "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"; // Replace securely
   const owner = "Purvash-143";
   const repo = "platform";
   const url = `https://api.github.com/repos/${owner}/${repo}/actions/workflows/deploy.yml/dispatches`;
