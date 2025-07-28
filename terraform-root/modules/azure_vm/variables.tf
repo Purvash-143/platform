@@ -24,6 +24,7 @@ variable "admin_username" {
 }
 
 variable "admin_password" {
-  type    = string
+  type        = string
   description = "Password for admin user"
+  default     = "P@ssw0rd1234!" # 🚫 for demo/testing only
 }
