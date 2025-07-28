@@ -1,5 +1,5 @@
 let selectedAssets = {
-  Infrastructure: null
+  Infrastructure: null,
   // Application: null,
   // Monitoring: null
 };
