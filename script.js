@@ -1,3 +1,35 @@
+let selectedAssets = {};
+
+// Fetch catalog.json and populate the dropdown
+window.onload = () => {
+  fetch("catalog.json")
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("Failed to load catalog.json");
+      }
+      return response.json();
+    })
+    .then(data => {
+      const infraSelect = document.getElementById("infrastructure-select");
+      data.forEach(asset => {
+        if (asset.category === "Infrastructure") {
+          const option = document.createElement("option");
+          option.value = asset.id;
+          option.textContent = asset.name;
+          infraSelect.appendChild(option);
+        }
+      });
+
+      infraSelect.addEventListener("change", (e) => {
+        selectedAssets.Infrastructure = e.target.value;
+      });
+    })
+    .catch(error => {
+      console.error("Error loading catalog.json:", error);
+      alert("❌ Could not load virtual machine options.");
+    });
+};
+
 function triggerDeployment() {
   const vmType = selectedAssets.Infrastructure;
 
@@ -6,7 +38,6 @@ function triggerDeployment() {
     return;
   }
 
-  // Replace with your actual Render backend URL
   const backendUrl = "https://deploy-backend-s2vu.onrender.com/trigger";
 
   fetch(backendUrl, {
