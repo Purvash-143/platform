@@ -1,37 +1,25 @@
-let selectedAssets = {};
-
-// Fetch catalog.json and populate the dropdown
-window.onload = () => {
+// Load VM options from catalog.json and populate the dropdown
+window.onload = function () {
   fetch("catalog.json")
-    .then(response => {
-      if (!response.ok) {
-        throw new Error("Failed to load catalog.json");
-      }
-      return response.json();
-    })
+    .then(res => res.json())
     .then(data => {
       const infraSelect = document.getElementById("infrastructure-select");
       data.forEach(asset => {
-        if (asset.category === "Infrastructure") {
-          const option = document.createElement("option");
-          option.value = asset.id;
-          option.textContent = asset.name;
-          infraSelect.appendChild(option);
-        }
-      });
-
-      infraSelect.addEventListener("change", (e) => {
-        selectedAssets.Infrastructure = e.target.value;
+        const option = document.createElement("option");
+        option.value = asset.id;
+        option.textContent = asset.name;
+        infraSelect.appendChild(option);
       });
     })
-    .catch(error => {
-      console.error("Error loading catalog.json:", error);
-      alert("❌ Could not load virtual machine options.");
+    .catch(err => {
+      console.error("❌ Error loading catalog.json:", err);
+      alert("❌ Failed to load VM options.");
     });
 };
 
+// Trigger deployment on button click
 function triggerDeployment() {
-  const vmType = selectedAssets.Infrastructure;
+  const vmType = document.getElementById("infrastructure-select").value;
 
   if (!vmType) {
     alert("⚠️ Please select a Virtual Machine before deploying.");
