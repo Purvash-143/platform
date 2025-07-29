@@ -17,7 +17,7 @@ variable "instance_type" {
 }
 
 variable "instance_name" {
-  description = "Name tag for the instance"
+  description = "GOLDENPATH"
   type        = string
   default     = "GoldenPath-EC2"
 }
