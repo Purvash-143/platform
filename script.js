@@ -1,31 +1,3 @@
-let selectedAssets = {
-  Infrastructure: null
-};
-
-// ✅ Load catalog.json and populate dropdown
-fetch("catalog.json")
-  .then(response => response.json())
-  .then(data => {
-    const infraSelect = document.getElementById("infrastructure-select");
-    data.forEach(item => {
-      if (item.category === "Infrastructure") {
-        const option = document.createElement("option");
-        option.value = item.id;
-        option.text = item.name;
-        infraSelect.appendChild(option);
-      }
-    });
-
-    infraSelect.addEventListener("change", (e) => {
-      selectedAssets.Infrastructure = e.target.value;
-    });
-  })
-  .catch(err => {
-    console.error("Failed to load catalog.json:", err);
-    alert("❌ Failed to load VM list.");
-  });
-
-// ✅ Trigger deployment function
 function triggerDeployment() {
   const vmType = selectedAssets.Infrastructure;
 
@@ -34,37 +6,28 @@ function triggerDeployment() {
     return;
   }
 
-  const token = "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"; // Replace securely
-  const owner = "Purvash-143";
-  const repo = "platform";
-  const url = `https://api.github.com/repos/${owner}/${repo}/actions/workflows/deploy.yml/dispatches`;
+  // Replace with your actual Render backend URL
+  const backendUrl = "https://deploy-backend-s2vu.onrender.com/trigger";
 
-  fetch(url, {
+  fetch(backendUrl, {
     method: "POST",
     headers: {
-      "Authorization": `Bearer ${token}`,
-      "Accept": "application/vnd.github+json",
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({
-      ref: "main",
-      inputs: {
-        vm_type: vmType
-      }
-    })
+    body: JSON.stringify({ vm_type: vmType })
   })
     .then(response => {
-      if (response.status === 204) {
+      if (response.ok) {
         alert(`✅ Deployment triggered for: ${vmType}`);
       } else {
         return response.json().then(data => {
-          console.error("❌ GitHub API error:", data);
+          console.error("❌ Backend error:", data);
           alert("❌ Deployment failed. See console for details.");
         });
       }
     })
     .catch(err => {
       console.error("❌ Network error:", err);
-      alert("❌ Could not reach GitHub API.");
+      alert("❌ Could not reach backend API.");
     });
 }
