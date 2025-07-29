@@ -27,10 +27,7 @@ jobs:
         run: |
           mkdir terraform
           if [[ "${{ github.event.inputs.vm_type }}" == "ec2" ]]; then
-            ls 
-            ls modules
-            ls modules/ec2
-            cp -r modules/ec2/* terraform/
+            cp -r terraform-root/modules/ec2/* terraform/
           elif [[ "${{ github.event.inputs.vm_type }}" == "azure_vm" ]]; then
             cp -r modules/azure_vm/* terraform/
           fi
