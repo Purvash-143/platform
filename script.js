@@ -3,7 +3,7 @@ window.onload = function () {
   fetch("catalog.json")
     .then(res => res.json())
     .then(data => {
-      const infraSelect = document.getElementById("infrastructure-select");
+      const infraSelect = document.getElementById("goldenpath-select");
       data.forEach(asset => {
         const option = document.createElement("option");
         option.value = asset.id;
@@ -13,16 +13,16 @@ window.onload = function () {
     })
     .catch(err => {
       console.error("❌ Error loading catalog.json:", err);
-      alert("❌ Failed to load VM options.");
+      alert("❌ Failed to load GP options.");
     });
 };
 
 // Trigger deployment on button click
 function triggerDeployment() {
-  const vmType = document.getElementById("infrastructure-select").value;
+  const vmType = document.getElementById("goldenpath-select").value;
 
   if (!vmType) {
-    alert("⚠️ Please select a Virtual Machine before deploying.");
+    alert("⚠️ Please select a Golden Path before deploying.");
     return;
   }
 
