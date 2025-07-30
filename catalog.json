@@ -1,13 +1,11 @@
 [
   {
-    "id": "ec2",
-    "name": "EC2 Instance",
-    "description": "Deploys an AWS EC2 Virtual Machine.",
-    "category": "Infrastructure",
-    "terraform_module": "terraform-aws-modules/ec2-instance/aws"
+    "id": "gp1",
+    "name": "Golden Path 1",
+    "description": "EC2 + Java + CodeQL + Prometheus",
   },
   {
-    "id": "azure_vm",
+    "id": "gp2",
     "name": "Azure VM",
     "description": "Deploys an Azure Virtual Machine.",
     "category": "Infrastructure",
