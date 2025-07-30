@@ -1,4 +1,11 @@
 [
+   {
+    "id": "azure_vm",
+    "name": "Azure VM",
+    "description": "Deploys an Azure Virtual Machine.",
+    "category": "Infrastructure",
+    "terraform_module": "terraform-azurerm-modules/vm/azure"
+  },
   {
     "id": "gp1",
     "name": "Golden Path 1",
