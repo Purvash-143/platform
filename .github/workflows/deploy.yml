@@ -9,8 +9,8 @@ on:
         default: 'ec2'
         type: choice
         options:
-          - ec2
-          - azure_vm
+          - gp1
+          - gp2
 
 jobs:
   deploy:
